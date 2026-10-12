@@ -30,7 +30,7 @@ void insertion_sort(Student a[],
         for (i = lo + 1; i <= hi; i++) {
                 Student key = a[i];
                 j = i - 1;
-                while (j >= lo && less(&key, &a[j]) < 0) {
+                while (j >= lo && less(&key, &a[j]) > 0) { 
                         a[j + 1] = a[j];
                         j--;
                 }
@@ -58,7 +58,7 @@ void merge(Student a[],
                         a[k] = aux[j++];
                 } else if (j > hi) {
                         a[k] = aux[i++];
-                } else if (less(&aux[j], &aux[i]) < 0) {
+                } else if (less(&aux[j], &aux[i]) < 0) { 
                         a[k] = aux[j++];
                 } else {
                         a[k] = aux[i++];
@@ -72,6 +72,8 @@ void mergesort(Student a[],
                int hi,
                int (*less)(const Student *, const Student *))
 {
+        if (hi <= lo) return; 
+
         if (hi - lo <= CUTOFF) {
                 insertion_sort(a, lo, hi, less);
                 return;
@@ -80,7 +82,7 @@ void mergesort(Student a[],
         int mid = lo + (hi - lo) / 2;
 
         mergesort(a, aux, lo, mid, less);
-        mergesort(a, aux, mid + 1, hi, less); 
+        mergesort(a, aux, mid + 1, hi, less);
 
         merge(a, aux, lo, mid, hi, less);
 }
