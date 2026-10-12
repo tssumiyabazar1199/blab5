@@ -30,7 +30,6 @@ void insertion_sort(Student a[],
         for (i = lo + 1; i <= hi; i++) {
                 Student key = a[i];
                 j = i - 1;
-                /* Алдаа 1-ийг зассан: j >= lo болгосон */
                 while (j >= lo && less(&key, &a[j]) < 0) {
                         a[j + 1] = a[j];
                         j--;
@@ -81,7 +80,7 @@ void mergesort(Student a[],
         int mid = lo + (hi - lo) / 2;
 
         mergesort(a, aux, lo, mid, less);
-        mergesort(a, aux, mid, hi, less);
+        mergesort(a, aux, mid + 1, hi, less); 
 
         merge(a, aux, lo, mid, hi, less);
 }
