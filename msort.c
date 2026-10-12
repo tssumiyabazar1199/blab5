@@ -9,6 +9,7 @@ int nereer(const Student *a, const Student *b)
         if (res > 0) return -1;
         if (res == 0) return 0;
         return 1;
+        
 }
 
 int nasaar(const Student *a, const Student *b)
