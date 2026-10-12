@@ -5,7 +5,10 @@
 
 int nereer(const Student *a, const Student *b)
 {
-        return strcmp(a->name, b->name) < 0;
+        int res = strcmp(a->name, b->name);
+        if (res > 0) return -1;
+        if (res == 0) return 0;
+        return 1;
 }
 
 int nasaar(const Student *a, const Student *b)
@@ -30,7 +33,7 @@ void insertion_sort(Student a[],
         for (i = lo + 1; i <= hi; i++) {
                 Student key = a[i];
                 j = i - 1;
-                while (j >= lo && less(&key, &a[j]) > 0) { 
+                while (j >= lo && less(&key, &a[j]) > 0) {
                         a[j + 1] = a[j];
                         j--;
                 }
@@ -58,7 +61,7 @@ void merge(Student a[],
                         a[k] = aux[j++];
                 } else if (j > hi) {
                         a[k] = aux[i++];
-                } else if (less(&aux[j], &aux[i]) < 0) { 
+                } else if (less(&aux[j], &aux[i]) > 0) {
                         a[k] = aux[j++];
                 } else {
                         a[k] = aux[i++];
@@ -72,7 +75,7 @@ void mergesort(Student a[],
                int hi,
                int (*less)(const Student *, const Student *))
 {
-        if (hi <= lo) return; 
+        if (hi <= lo) return;
 
         if (hi - lo <= CUTOFF) {
                 insertion_sort(a, lo, hi, less);
