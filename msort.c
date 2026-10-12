@@ -30,7 +30,8 @@ void insertion_sort(Student a[],
         for (i = lo + 1; i <= hi; i++) {
                 Student key = a[i];
                 j = i - 1;
-                while (j > lo && less(&key, &a[j]) < 0) {
+                /* Алдаа 1-ийг зассан: j >= lo болгосон */
+                while (j >= lo && less(&key, &a[j]) < 0) {
                         a[j + 1] = a[j];
                         j--;
                 }
